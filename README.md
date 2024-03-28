@@ -67,9 +67,11 @@ Same as the above example,
 
 as in MeV<sup>−1</sup> cm<sup>−2</sup> s<sup>−1</sup>.
 Throughout the entire package, we have implemented the differential DM-neutrino scattering cross section in CM frame is isotropic and energy-independent
+
 $$
 \frac{d\sigma_{\chi \nu}}{d\Omega_{\rm CM}}=\frac{\sigma_0}{4\pi}
 $$
+
 where $\sigma_0=10^{-35}$ cm<sup>2</sup>.
 
 The argument `usefit` is to turn on/off the fitting function used in obtaining the average supernova position on the galactic plane for galaxy with baryonic mass $M_G$.
