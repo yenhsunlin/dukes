@@ -55,8 +55,9 @@ Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluate
 #### The diffuse BDM flux
 
 The averaged diffuse BDM (DBDM) flux on the Earth is given by
+
 $$
-    \frac{d\Phi_\chi}{dT_\chi} = \frac{v_\chi}{H_0} \int_0^{z_{\rm max}} \frac{dz}{\varepsilon(z)}  \int dM_G \frac{d\Gamma_{{\rm SN}}(z)}{dM_G}\frac{d\bar N_\chi(M_G)}{dT_\chi^\prime}. 
+\frac{d\Phi_\chi}{dT_\chi} = \frac{v_\chi}{H_0} \int_0^{z_{\rm max}} \frac{dz}{\varepsilon(z)}  \int dM_G \frac{d\Gamma_{{\rm SN}}(z)}{dM_G}\frac{d\bar N_\chi(M_G)}{dT_\chi^\prime}. 
 $$
 
 Same as the above example,
