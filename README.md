@@ -1,7 +1,7 @@
 # `doom`: *D*iffuse b*OO*sted dark *M*atter yielded from supernova neutrinos in the early universe
 
 
-`doom` is a package for evaluating the diffuse signature of dark matter boosted in the early Universe due to supernova neutrinos based on `arXiv:20xx.xxxx`.
+`doom` is a package for evaluating the diffuse signature of dark matter boosted in the early Universe due to supernova neutrinos based on `arXiv:24xx.xxxx`.
 
 ## Installation
 
