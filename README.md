@@ -5,7 +5,7 @@
 
 ## Installation
 
-To install, excute following command on the terminal:
+To install, excute the following command on the prompt
 
     $ pip install doom
 
