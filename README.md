@@ -1,4 +1,21 @@
-# `doom`
- Diffuse bOOsted dark Matter yielded by supernova neutrinos in early universe
+# `doom`: **D**iffuse b**OO**sted dark **M**atter yielded from supernova neutrinos in early universe
 
- version = "1.0.0"
+## Introduction
+
+`doom` is a package for evaluating the diffuse signature of dark matter boosted in the early Universe due to supernova neutrinos based on `arXiv:`.
+
+### Installation
+
+To install, excute following command on the terminal:
+
+    $ pip install doom
+
+#### Dependencies
+
+`doom` requires external packages
+
+-`numpy`
+-`scipy`
+-`vegas`
+
+where `vegas` is a package for evaluating multidimensional integrals using adaptive Monte Carlo vegas algorithm, see its description page [https://pypi.org/project/vegas/](https://pypi.org/project/vegas/).
