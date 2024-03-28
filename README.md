@@ -107,6 +107,30 @@ and year to seconds
     31560000.0
 
 
+### Script
+
+In python script, one can write
+
+    # doom_example.py
+
+    import sys
+    import doom
+
+    if __name__ == '__main__':
+
+        Tx = float(sys.argv[1])  # DM kinetic energy, MeV
+        mx = float(sys.argv[2])  # DM mass, MeV
+        vx = doom.vBDM(Tx,mx)    # BDM velocity
+        
+        print(vx)                # Print the BDM velocity
+
+and excute this on the prompt
+
+    $ python doom_example.py 5 1
+    0.9860132971832694
+
+or whatever style you like!
+
 ## Misc
 
 Bug report and troubleshooting please contact the author Yen-Hsun Lin via [yenhsun@phys.ncku.edu.tw](mailto:yenhsun@phys.ncku.edu.tw).
