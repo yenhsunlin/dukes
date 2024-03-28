@@ -33,7 +33,7 @@ To import, do
 
     >>> import doom
 
-in python terminal and is similar in the jupyter notebook. All module functions named `funcname` can be called by `doom.funcname`.
+in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by `doom.funcname`.
 
 ### Examples
 
