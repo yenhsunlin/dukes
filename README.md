@@ -109,7 +109,7 @@ and year to seconds
 
 ### Scripting
 
-In python script (see subsidiary `tests/duke_example.py`), one can write
+In python script (see subsidiary `tests/dukes_example.py`), one can write
 
     # dukes_example.py
 
