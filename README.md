@@ -1,11 +1,9 @@
 # `doom`: **D**iffuse b**OO**sted dark **M**atter yielded from supernova neutrinos in the early universe
 
 
-## Introduction
-
 `doom` is a package for evaluating the diffuse signature of dark matter boosted in the early Universe due to supernova neutrinos based on `arXiv:20xx.xxxx`.
 
-### Installation
+## Installation
 
 To install, excute following command on the terminal:
 
@@ -35,11 +33,9 @@ To import, do
 
     >>> import doom
 
-in the python terminal and is similar in the jupyter notebook. All module functions can be called like `dbdm.funcname`.
+in the python terminal and is similar in the jupyter notebook. All module functions can be called by `dbdm.funcname`.
 
 ### Examples
-
-#### Physical constants
 
 #### Boosted dark matter velocity
 
@@ -49,11 +45,63 @@ $$
 \frac{v_\chi}{c} = \frac{\sqrt{T_\chi(2m_\chi+T_\chi)}}{m_\chi+T_\chi}.
 $$
 
-Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluates $v_\chi/c$ is `doom.vBDM(Tx,mx)` is
+Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluates $v_\chi/c$ is
 
     >>> Tx,mx = 5,1  # MeV
     >>> doom.vBDM(Tx,mx)
     0.9860132971832694
+
+
+#### The diffuse BDM flux
+
+The averaged diffuse BDM (DBDM) flux on the Earth is given by
+$$
+    \frac{d\Phi_\chi}{dT_\chi} = \frac{v_\chi}{H_0} \int_0^{z_{\rm max}} \frac{dz}{\varepsilon(z)}  \int dM_G \frac{d\Gamma_{{\rm SN}}(z)}{dM_G}\frac{d\bar N_\chi(M_G)}{dT_\chi^\prime}. 
+$$
+
+Same as the above example,
+
+    >>> doom.dbdmFlux(Tx,mx,usefit=True,nitn=10,neval=50000)
+    4.422705310516041e-08
+
+as in MeV<sup>−1</sup> cm<sup>−2</sup> s<sup>−1</sup>.
+Throughout the entire package, we have implemented the differential DM-neutrino scattering cross section in CM frame is isotropic and energy-independent
+$$
+\frac{d\sigma_{\chi \nu}}{d\Omega_{\rm CM}}=\frac{\sigma_0}{4\pi}
+$$
+where $\sigma_0=10^{-35}$ cm<sup>2</sup>.
+
+The argument `usefit` is to turn on/off the fitting function used in obtaining the average supernova position on the galactic plane for galaxy with baryonic mass $M_G$.
+If `usefit=False`, the function will call `galacticDensityProfile` to evaluate the area density for galaxy with arbitrary $M_G$.
+It requires quadrature integration `quad` from scipy greatly enhances the computation time but the accuracy improvement is not significant.
+
+The arguments `nitn` and `neval` are passed to `vegas` and determine how many chains of iteration and how many numbers to be evaluated in each chain. Increasing them will improve the accuracy of the results but also longer computation time. See `vegas` [document](https://vegas.readthedocs.io/) for more detail.
+
+
+#### Physical constants
+
+We have a class named `constant` that contains multiple physical constants and conversion factors frequently used in this package.
+For instance, electron mass
+
+    >>> doom.constant.me
+    0.511
+
+as in MeV and the speed of light
+
+    >>> doom.constant.c
+    29980000000.0
+
+as in cm s<sup>−1</sup>.
+Conversion factors such as converting kpc to cm
+
+    >>> doom.constant.kpc2cm
+    3.085e21
+
+and year to seconds
+
+    >>> doom.constant.year2Seconds
+    31560000.0
+
 ## Misc
 
 Bug report and troubleshooting please contact the author Yen-Hsun Lin via [yenhsun@phys.ncku.edu.tw](mailto:yenhsun@phys.ncku.edu.tw).
