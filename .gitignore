@@ -29,8 +29,5 @@ pip-wheel-metadata/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# my own
-*.bak
-
 # Test
 #tests/
