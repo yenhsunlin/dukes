@@ -472,7 +472,7 @@ class dbdmSpectrum(constant):
             raise FlagError('Flag \'is_weighted\' must be a boolean.')
 
 
-def dbdmFlux(Tx,mx,                                                           \
+def flux(Tx,mx,                                                           \
              R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,      \
              sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, \
              nitn=10,neval=50000):
@@ -523,7 +523,7 @@ def dbdmFlux(Tx,mx,                                                           \
     return flux
 
 
-def dbdmEvent(mx,                                                                          \
+def event(mx,                                                                          \
               TxRange=[5,100],R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,  \
               sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             \
               nitn=10,neval=50000):

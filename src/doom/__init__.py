@@ -11,7 +11,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-__name__         = 'doom'
+__name__         = 'duke'
 __version__      = '1.0.0'
 __description__  = 'Diffuse boosted dark matter from supernova neutrinos in early Universe'
 __author__       = 'Yen-Hsun Lin'
@@ -19,4 +19,4 @@ __email__        = 'yenhsun@phys.ncku.edu.tw'
 __url__          = 'https://github.com/yenhsunlin/doom'
 __license__      = 'GNU GPL-3.0'
 
-from .doomMain import *
+from .dukeMain import *
