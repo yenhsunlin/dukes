@@ -109,7 +109,7 @@ and year to seconds
 
 ### Scripting
 
-In python script, one can write
+In python script (see subsidiary `tests/doom_example.py`), one can write
 
     # doom_example.py
 
