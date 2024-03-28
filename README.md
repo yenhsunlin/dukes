@@ -21,7 +21,9 @@ and everything should be processed on-the-fly.
 - `scipy` >= 1.10.0
 - `vegas` >= 6.0.1
 
-where `vegas` is a the backend engine for evaluating multidimensional integrals based on adaptive Monte Carlo vegas algorithm, see its homepage: [https://pypi.org/project/vegas/](https://pypi.org/project/vegas/). Other packages, e.g. `gvar`, maybe required by these dependencies during the installation.
+where `vegas` is a the backend engine for evaluating multidimensional integrals based on adaptive Monte Carlo vegas algorithm, see its homepage: [https://pypi.org/project/vegas/](https://pypi.org/project/vegas/).
+
+Other packages, e.g. `gvar`, maybe required by these dependencies during the installation.
 The versions of these dependencies are not strict, but are recommended to update to the latest ones to avoid incompatibility. 
 
 
