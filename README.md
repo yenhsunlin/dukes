@@ -107,7 +107,7 @@ and year to seconds
     31560000.0
 
 
-### Script
+### Scripting
 
 In python script, one can write
 
