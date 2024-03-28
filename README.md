@@ -33,4 +33,4 @@ To import, do
 
     >>> import dbdm
 
-in the python terminal. All documented module functions can be called like `dbdm.*funcname*`. 
+in the python terminal. All documented module functions can be called like `dbdm.``*funcname*`. 
