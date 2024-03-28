@@ -1,19 +1,19 @@
 # Diffuse boosted dark matter yielded from supernova neutrinos in the early Universe
 
 
-`duke` is a package for evaluating the signature of **D**iff**U**se boosted dar**K** matt**E**r in the early Universe due to supernova neutrinos based on `arXiv:24xx.xxxx`.
+`dukes` is a package for evaluating the signature of **D**iff**U**se boosted dar**K** matt**E**r yielded by **S**upernova neutrinos in the early Universe based on `arXiv:24xx.xxxx`.
 
 ## Installation
 
 To install, excute the following command on the prompt
 
-    $ pip install duke
+    $ pip install dukes
 
 and everything should be processed on-the-fly.
 
 ### Dependency
 
-`duke` requires these external packages
+`dukes` requires these external packages
 
 - `numpy` >= 1.20.0
 - `scipy` >= 1.10.0
@@ -31,9 +31,9 @@ We briefly summarize the usage in this section and a comprehensive tutorial can 
 
 To import, do
 
-    >>> import duke
+    >>> import dukes
 
-in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by typing `duke.funcname`.
+in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by typing `dukes.funcname`.
 
 ### Examples
 
@@ -48,7 +48,7 @@ $$
 Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluates $v_\chi/c$ is
 
     >>> Tx,mx = 5,1  # MeV
-    >>> duke.vBDM(Tx,mx)
+    >>> dukes.vBDM(Tx,mx)
     0.9860132971832694
 
 
@@ -62,7 +62,7 @@ $$
 
 Same as the above example,
 
-    >>> duke.flux(Tx,mx,usefit=True,nitn=10,neval=50000)
+    >>> dukes.flux(Tx,mx,usefit=True,nitn=10,neval=50000)
     4.422705310516041e-08
 
 as in MeV<sup>−1</sup> cm<sup>−2</sup> s<sup>−1</sup>.
@@ -87,23 +87,23 @@ The arguments `nitn` and `neval` are passed to `vegas` and determine how many ch
 We have a class named `constant` that contains multiple physical constants and conversion factors frequently used in this package.
 For instance, electron mass
 
-    >>> duke.constant.me
+    >>> dukes.constant.me
     0.511
 
 as in MeV and the speed of light
 
-    >>> duke.constant.c
+    >>> dukes.constant.c
     29980000000.0
 
 as in cm s<sup>−1</sup>.
 Conversion factors such as converting kiloparsec to centimeters
 
-    >>> duke.constant.kpc2cm
+    >>> dukes.constant.kpc2cm
     3.085e21
 
 and year to seconds
 
-    >>> duke.constant.year2Seconds
+    >>> dukes.constant.year2Seconds
     31560000.0
 
 
@@ -111,22 +111,22 @@ and year to seconds
 
 In python script (see subsidiary `tests/duke_example.py`), one can write
 
-    # duke_example.py
+    # dukes_example.py
 
     import sys
-    import duke
+    import dukes
 
     if __name__ == '__main__':
 
         Tx = float(sys.argv[1])  # DM kinetic energy, MeV
         mx = float(sys.argv[2])  # DM mass, MeV
-        vx = duke.vBDM(Tx,mx)    # BDM velocity
+        vx = dukes.vBDM(Tx,mx)    # BDM velocity
         
         print(vx)                # Print the BDM velocity
 
 and excute this on the prompt
 
-    $ python duke_example.py 5 1
+    $ python dukes_example.py 5 1
     0.9860132971832694
 
 or whatever style you like!
