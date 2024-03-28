@@ -436,7 +436,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
-        if Txp < 200:
+        if Txp < 200:  # discard the BDM signature if it requires Ev > 200 MeV at z 
             MG = 10**m
             return MG*dnG(m,z)/_E(z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,MG,R,l,theta,thetaCM,is_spike,sigv, \
                                                                     tBH,rhosMW,rsMW,eta)
@@ -448,7 +448,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx 
-        if Txp < 200:
+        if Txp < 200:  # discard the BDM signature if it requires Ev > 200 MeV at z
             MG = 10**m
             # adopt fitting data for galactic area density?
             if usefit is True:
