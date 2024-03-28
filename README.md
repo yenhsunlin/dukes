@@ -10,12 +10,14 @@ To install, excute following command on the terminal:
 
     $ pip install doom
 
+and everything should be processed on-the-fly.
+
 #### Dependencies
 
-`doom` requires external packages
+`doom` requires these external packages
 
--`numpy`
--`scipy`
--`vegas`
+- `numpy`
+- `scipy`
+- `vegas`
 
-where `vegas` is a package for evaluating multidimensional integrals using adaptive Monte Carlo vegas algorithm, see its description page [https://pypi.org/project/vegas/](https://pypi.org/project/vegas/).
+where `vegas` is a package for evaluating multidimensional integrals using adaptive Monte Carlo vegas algorithm, see its homepage: [https://pypi.org/project/vegas/](https://pypi.org/project/vegas/). Additional package, e.g. `gvar`, maybe required by `vegas` during the installation.
