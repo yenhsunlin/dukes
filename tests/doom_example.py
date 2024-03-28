@@ -5,6 +5,7 @@ import doom
 
 if __name__ == '__main__':
 
+    #Tx,mx = 5,1
     Tx = int(sys.argv[1])   # DM kinetic energy, MeV
     mx = int(sys.argv[2])   # DM mass, MeV
     vx = doom.vBDM(Tx,mx)   # BDM velocity
