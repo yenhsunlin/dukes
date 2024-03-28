@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "duke"
-version = "1.0.0"
+version = "1.0.1"
 description = "Diffuse boosted dark matter from supernova neutrinos in early Universe"
 readme = "README.md"
 authors = [{ name = "Yen-Hsun Lin", email = "yenhsun@phys.ncku.edu.tw" }]
@@ -16,7 +16,7 @@ dependencies = [
 requires-python = ">=3.6"
 
 [project.urls]
-Homepage = "https://github.com/yenhsunlin/doom"
+Homepage = "https://github.com/yenhsunlin/duke"
 
 [tool.bumpver]
 current_version = "1.0.1"
