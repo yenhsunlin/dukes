@@ -507,13 +507,13 @@ def dbdmFlux(Tx,mx,                                                           \
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,MG,R,l,theta,thetaCM)
+        integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,R,l,theta,thetaCM)
         result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5], \
                                                is_spike=is_spike,is_weighted=is_average,sigv=sigv,tBH=tBH,      \
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit),nitn=nitn,neval=neval).mean
         flux = 4*_np.pi**2*tau*result*constant.kpc2cm**3*vBDM(Tx,mx)*preFactor
     elif is_average is False:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,MG,l,theta,thetaCM)
+        integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,l,theta,thetaCM)
         result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=R,l=x[2],theta=x[3],thetaCM=x[4],    \
                                                is_spike=is_spike,is_weighted=is_average,sigv=sigv,tBH=tBH,      \
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit),nitn=nitn,neval=neval).mean
@@ -558,14 +558,14 @@ def dbdmEvent(mx,                                                               
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,MG,R,l,theta,thetaCM)
+        integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,R,l,theta,thetaCM)
         result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=x[6],mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5],  \
                                                is_spike=is_spike,is_weighted=is_average,sigv=sigv,tBH=tBH,         \
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[6],mx=mx), \
                             nitn=nitn,neval=neval).mean
         event = 4*_np.pi**2*tau*result*constant.kpc2cm**3*preFactor
     elif is_average is False:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,MG,l,theta,thetaCM,Tx)
+        integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,l,theta,thetaCM,Tx)
         result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=x[5],mx=mx,R=R,l=x[2],theta=x[3],thetaCM=x[4],     \
                                                is_spike=is_spike,is_weighted=is_average,sigv=sigv,tBH=tBH,         \
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[5],mx=mx), \
