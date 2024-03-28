@@ -1,6 +1,6 @@
 # `doom`: **D**iffuse b**OO**sted dark **M**atter yielded from supernova neutrinos in early universe
 
-Current version = "1.0.0"
+
 
 ## Introduction
 

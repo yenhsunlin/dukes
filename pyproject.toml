@@ -35,10 +35,10 @@ push = true
     'current_version = "{version}"',
 ]
 
-"README.md" = [
-    "{version}",
+#"README.md" = [
+#    "{version}",
 #    "{pep440_version}",
-]
+#]
 
 "src/doom/__init__.py" = [
     "{version}",
