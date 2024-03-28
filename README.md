@@ -79,7 +79,7 @@ The argument `usefit` is to turn on/off the fitting function used in obtaining t
 If `usefit=False`, the function will call `galacticDensityProfile` to evaluate the area density for galaxy with arbitrary $M_G$.
 It requires quadrature integration `quad` from scipy and the computation time surges accordingly, but the accuracy is improved insignificantly.
 
-The arguments `nitn` and `neval` are passed to `vegas` and determine how many chains of iteration and how many numbers to be evaluated in each chain. Increasing them will improve the accuracy of the results but also longer computation time. We relegate the detail to `vegas` [documentation](https://vegas.readthedocs.io/).
+The arguments `nitn` and `neval` are passed to `vegas` and determine how many chains of iteration and how many numbers to be evaluated in each chain. Increasing them will improve the accuracy of the results but also cost longer computation time. We relegate the detail to `vegas` [documentation](https://vegas.readthedocs.io/).
 
 
 #### Physical constants
