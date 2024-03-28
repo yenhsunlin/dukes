@@ -66,6 +66,7 @@ Same as the above example,
     4.422705310516041e-08
 
 as in MeV<sup>−1</sup> cm<sup>−2</sup> s<sup>−1</sup>.
+
 Throughout the entire package, we have implemented the differential DM-neutrino scattering cross section in CM frame is isotropic and energy-independent
 
 $$
