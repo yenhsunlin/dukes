@@ -33,7 +33,7 @@ To import, do
 
     >>> import doom
 
-in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by `doom.funcname`.
+in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by typing `doom.funcname`.
 
 ### Examples
 
@@ -76,9 +76,9 @@ where $\sigma_0=10^{-35}$ cm<sup>2</sup>.
 
 The argument `usefit` is to turn on/off the fitting function used in obtaining the average supernova position on the galactic plane for galaxy with baryonic mass $M_G$.
 If `usefit=False`, the function will call `galacticDensityProfile` to evaluate the area density for galaxy with arbitrary $M_G$.
-It requires quadrature integration `quad` from scipy greatly enhances the computation time but the accuracy improvement is not significant.
+It requires quadrature integration `quad` from scipy and the computation time surges accordingly, but the accuracy is improved insignificantly.
 
-The arguments `nitn` and `neval` are passed to `vegas` and determine how many chains of iteration and how many numbers to be evaluated in each chain. Increasing them will improve the accuracy of the results but also longer computation time. See `vegas` [document](https://vegas.readthedocs.io/) for more detail.
+The arguments `nitn` and `neval` are passed to `vegas` and determine how many chains of iteration and how many numbers to be evaluated in each chain. Increasing them will improve the accuracy of the results but also longer computation time. We relegate the detail to `vegas` [documentation](https://vegas.readthedocs.io/).
 
 
 #### Physical constants
@@ -95,7 +95,7 @@ as in MeV and the speed of light
     29980000000.0
 
 as in cm s<sup>−1</sup>.
-Conversion factors such as converting kpc to cm
+Conversion factors such as converting kiloparsec to centimeters
 
     >>> doom.constant.kpc2cm
     3.085e21
@@ -104,6 +104,7 @@ and year to seconds
 
     >>> doom.constant.year2Seconds
     31560000.0
+
 
 ## Misc
 
