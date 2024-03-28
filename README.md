@@ -11,7 +11,7 @@ To install, excute the following command on the prompt
 
 and everything should be processed on-the-fly.
 
-### Dependencies
+### Dependency
 
 `doom` requires these external packages
 
