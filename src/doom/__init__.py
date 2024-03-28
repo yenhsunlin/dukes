@@ -17,6 +17,6 @@ __description__  = 'Diffuse boosted dark matter from supernova neutrinos in earl
 __author__       = 'Yen-Hsun Lin'
 __email__        = 'yenhsun@phys.ncku.edu.tw'
 __url__          = 'https://github.com/yenhsunlin/doom'
-__license__      = 'GPL-3.0'
+__license__      = 'GNU GPL-3.0'
 
 from .doomMain import *
