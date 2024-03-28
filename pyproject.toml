@@ -40,7 +40,7 @@ push = true
 #    "{pep440_version}",
 #]
 
-"src/doom/__init__.py" = [
+"src/duke/__init__.py" = [
     "{version}",
 ]
 
