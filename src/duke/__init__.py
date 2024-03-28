@@ -16,7 +16,7 @@ __version__      = '1.0.1'
 __description__  = 'Diffuse boosted dark matter from supernova neutrinos in early Universe'
 __author__       = 'Yen-Hsun Lin'
 __email__        = 'yenhsun@phys.ncku.edu.tw'
-__url__          = 'https://github.com/yenhsunlin/doom'
+__url__          = 'https://github.com/yenhsunlin/duke'
 __license__      = 'GNU GPL-3.0'
 
 from .dukeMain import *
