@@ -1,19 +1,19 @@
-# `doom`: *D*iffuse b*OO*sted dark *M*atter yielded from supernova neutrinos in the early universe
+# Diffuse boosted dark matter yielded from supernova neutrinos in the early Universe
 
 
-`doom` is a package for evaluating the diffuse signature of dark matter boosted in the early Universe due to supernova neutrinos based on `arXiv:24xx.xxxx`.
+`duke` is a package for evaluating the signature of *D*iff*U*se boosted dar*K* matt*E*r in the early Universe due to supernova neutrinos based on `arXiv:24xx.xxxx`.
 
 ## Installation
 
 To install, excute the following command on the prompt
 
-    $ pip install doom
+    $ pip install duke
 
 and everything should be processed on-the-fly.
 
 ### Dependency
 
-`doom` requires these external packages
+`duke` requires these external packages
 
 - `numpy` >= 1.20.0
 - `scipy` >= 1.10.0
@@ -31,9 +31,9 @@ We briefly summarize the usage in this section and a comprehensive tutorial can 
 
 To import, do
 
-    >>> import doom
+    >>> import duke
 
-in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by typing `doom.funcname`.
+in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by typing `duke.funcname`.
 
 ### Examples
 
@@ -48,7 +48,7 @@ $$
 Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluates $v_\chi/c$ is
 
     >>> Tx,mx = 5,1  # MeV
-    >>> doom.vBDM(Tx,mx)
+    >>> duke.vBDM(Tx,mx)
     0.9860132971832694
 
 
@@ -62,7 +62,7 @@ $$
 
 Same as the above example,
 
-    >>> doom.dbdmFlux(Tx,mx,usefit=True,nitn=10,neval=50000)
+    >>> duke.flux(Tx,mx,usefit=True,nitn=10,neval=50000)
     4.422705310516041e-08
 
 as in MeV<sup>−1</sup> cm<sup>−2</sup> s<sup>−1</sup>.
@@ -87,46 +87,46 @@ The arguments `nitn` and `neval` are passed to `vegas` and determine how many ch
 We have a class named `constant` that contains multiple physical constants and conversion factors frequently used in this package.
 For instance, electron mass
 
-    >>> doom.constant.me
+    >>> duke.constant.me
     0.511
 
 as in MeV and the speed of light
 
-    >>> doom.constant.c
+    >>> duke.constant.c
     29980000000.0
 
 as in cm s<sup>−1</sup>.
 Conversion factors such as converting kiloparsec to centimeters
 
-    >>> doom.constant.kpc2cm
+    >>> duke.constant.kpc2cm
     3.085e21
 
 and year to seconds
 
-    >>> doom.constant.year2Seconds
+    >>> duke.constant.year2Seconds
     31560000.0
 
 
 ### Scripting
 
-In python script (see subsidiary `tests/doom_example.py`), one can write
+In python script (see subsidiary `tests/duke_example.py`), one can write
 
-    # doom_example.py
+    # duke_example.py
 
     import sys
-    import doom
+    import duke
 
     if __name__ == '__main__':
 
         Tx = float(sys.argv[1])  # DM kinetic energy, MeV
         mx = float(sys.argv[2])  # DM mass, MeV
-        vx = doom.vBDM(Tx,mx)    # BDM velocity
+        vx = duke.vBDM(Tx,mx)    # BDM velocity
         
         print(vx)                # Print the BDM velocity
 
 and excute this on the prompt
 
-    $ python doom_example.py 5 1
+    $ python duke_example.py 5 1
     0.9860132971832694
 
 or whatever style you like!
