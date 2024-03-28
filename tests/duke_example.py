@@ -1,4 +1,4 @@
-# doom_example.py
+# duke_example.py
 
 import sys
 import duke
