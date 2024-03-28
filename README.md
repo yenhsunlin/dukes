@@ -1,7 +1,7 @@
-# Diffuse boosted dark matter yielded from supernova neutrinos in the early Universe
+# Diffuse boosted dark matter by supernova neutrinos in the early Universe
 
 
-`dukes` is a package for evaluating the signature of **D**iff**U**se boosted dar**K** matt**E**r yielded by **S**upernova neutrinos in the early Universe based on `arXiv:24xx.xxxxx`.
+`dukes` is a package for evaluating the signatures of **D**iff**U**se boosted dar**K** matt**E**r by **S**upernova neutrinos in the early Universe based on `arXiv:24xx.xxxxx`.
 
 ## Installation
 
