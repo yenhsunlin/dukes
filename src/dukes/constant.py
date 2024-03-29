@@ -42,34 +42,37 @@ class constant:
     Lv: SN neutrino luminosity, single specie, erg/s
     """
     # conversion factors 
-    md2MeVperCubicCM = 3.796e-5  # Msun/kpc^3 to MeV/cm^3
-    md2MeVperQuadCM = 1.171e17   # Msun/kpc^3 to MeV/cm^2
-    year2Seconds = 3.156e7       # year to seconds
-    erg2MeV = 624150.913         # erg to MeV
-    kpc2cm = 3.085e21            # kpc to cm
+    md2MeVperCubicCM = 3.796e-05        # Msun/kpc^3 to MeV/cm^3
+    md2MeVperQuadCM  = 1.171e+17        # Msun/kpc^3 to MeV/cm^2
+    year2Seconds     = 3.156e+07        # year to seconds
+    erg2MeV          = 6.241e+05        # erg to MeV
+    kpc2cm           = 3.085e+21        # kpc to cm
     
     # masses
-    me = 0.511                   # electron mass, MeV
-    mn = 939.564                 # neutron mass, MeV
-    mp = 938.272                 # proton mass, MeV
-    Msun = 1.115e60              # Solar mass, MeV
-    Msun_kg = 1.981e30           # Solar mass, kg
-    Mmw = 5.29e10                # MW stellar mass, Msun
-    Mhalo = 1.29e12              # MW halo mass, Msun
+    me               = 5.110e-01        # electron mass, MeV
+    mn               = 9.395e+02        # neutron mass, MeV
+    mp               = 9.382e+02        # proton mass, MeV
+    Msun             = 1.115e+60        # Solar mass, MeV
+    Msun_kg          = 1.981e+30        # Solar mass, kg
+    Mmw              = 5.290e+10        # MW stellar mass, Msun
+    Mhalo            = 1.290e+12        # MW halo mass, Msun
     
     # lengths
-    Rhalo = 230                  # MW halo radius, kpc
+    Rhalo            = 2.300e+02        # MW halo radius, kpc
+
+    # cross section
+    sigma0           = 1.000e-35        # sigma_0, cm^2
 
     # physical constants
-    c = 2.998e10                 # light speed, cm/s
-    H0 = 73                      # Hubble constant, km/s/Mpc
-    rho_c = 1.5e-7               # critical density, Msun/pc^3
-    Lv = 3e52/6                  # Supernova neutrino luminosity (single specie), erg/s
-    Omega_0m = 0.315             # Cosmological matter fraction
-    Omega_0L = 0.685             # Cosmological dark energy fraction
-    Omega_0r = 0.0023            # Cosmological radiation fraction
-    Omega_0 = 1                  # Cosmological total energy
-    D_H0 = 4280                  # Mpc
-    G = 6.6743e-11               # Newton gravitational constant, meter^3 kg^-1 s^-2
+    c                = 2.998e+10        # light speed, cm/s
+    H0               = 7.300e+10        # Hubble constant, km/s/Mpc
+    rho_c            = 1.500e-07        # critical density, Msun/pc^3
+    Lv               = 3.000e+52/6      # Supernova neutrino luminosity (single specie), erg/s
+    Omega_0m         = 3.150e-01        # Cosmological matter fraction
+    Omega_0L         = 6.850e-01        # Cosmological dark energy fraction
+    Omega_0r         = 2.300e-03        # Cosmological radiation fraction
+    Omega_0          = 1.000            # Cosmological total energy
+    D_H0             = 4.280e+03        # Mpc
+    G                = 6.674e-11        # Newton gravitational constant, meter^3 kg^-1 s^-2
 
-    MagicalNumber = 2.57258e-64
+    MagicalNumber    = 2.572e-64
