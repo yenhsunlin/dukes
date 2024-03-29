@@ -21,7 +21,7 @@ manually by users via
 
 >>> from dukes.utils import funcname
 
-where funcname are the desired class or function.
+where funcname is the name of the desired class or function.
 
 """
 
