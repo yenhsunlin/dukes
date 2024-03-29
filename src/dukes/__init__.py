@@ -12,7 +12,7 @@
 # GNU General Public License for more details.
 
 __name__         = 'dukes'
-__version__      = '1.0.3'
+__version__      = '1.1.0'
 __description__  = 'Diffuse boosted dark matter from supernova neutrinos in early Universe'
 __author__       = 'Yen-Hsun Lin'
 __email__        = 'yenhsun@phys.ncku.edu.tw'
