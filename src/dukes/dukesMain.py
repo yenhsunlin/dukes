@@ -531,10 +531,10 @@ def event(mx,                                                                   
           sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             \
           nitn=10,neval=50000):
     """
-    DBDM event per electron for given mx assuming isotropic and energy-
-    independent differential DM-nuetrino cross section in CM frame with
-    the value 1e-35/4/pi cm^2/std. The total DM-electron cross section
-    is assumed 1e-35 cm^2
+    DBDM event per electron per second for given mx assuming isotropic
+    and energy-independent differential DM-nuetrino cross section in CM
+    frame with the value 1e-35/4/pi cm^2/std. The total DM-electron cross
+    section is assumed 1e-35 cm^2
     
     In
     ------
@@ -581,7 +581,3 @@ def event(mx,                                                                   
     else:
         raise FlagError('Flag \'is_average\' must be a boolean.')
     return event
-
-
-
-# ----- Interface for user-defined pheno model -----
