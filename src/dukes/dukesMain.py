@@ -278,7 +278,7 @@ def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.4
         nx = haloSpike()
         return nx(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta)
     elif is_spike is False:       
-        return nxNFW(r,mx,rhosMW,rsMW,MG,eta)
+        return nxNFW(r,mx,rhosMW,rsMW,MG)
     else:
         raise FlagError('Flag \'is_spike\' must be a boolean.')
 
