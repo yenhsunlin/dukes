@@ -28,11 +28,14 @@ class constant:
     me: electron
     mn: neutron
     mp: proton
-    Msun: Solar mass
+    Msun: Solar mass, MeV
+    Msun_kg: Solar mass, kg
+    Mmw: Milky Way stellar mass, Msun
+    Mhalo: DM halo mass of MW, Msun
     
     Lengths (cm)
     ------
-    kpc2cm
+    Rhalo: estimated MW halo radius, kpc
 
     Cross section
     ------
@@ -44,6 +47,7 @@ class constant:
     H0: Hubble constant, km/s/Mpc
     rho_c: critical density, Msun/pc^3
     Lv: SN neutrino luminosity, single specie, erg/s
+    G: Newton's constant, m^3/kg/s^2
     """
     # conversion factors 
     md2MeVperCubicCM = 3.796e-05        # Msun/kpc^3 to MeV/cm^3
