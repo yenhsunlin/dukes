@@ -581,3 +581,7 @@ def event(mx,                                                                   
     else:
         raise FlagError('Flag \'is_average\' must be a boolean.')
     return event
+
+
+
+# ----- Interface for user-defined pheno model -----
