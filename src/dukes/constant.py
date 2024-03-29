@@ -33,6 +33,10 @@ class constant:
     Lengths (cm)
     ------
     kpc2cm
+
+    Cross section
+    ------
+    sigma0: default value for cross section, cm^2
     
     Physical constants
     ------
