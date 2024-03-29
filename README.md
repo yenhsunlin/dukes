@@ -1,7 +1,8 @@
 # dukes: *D*iff*U*se-boosted dar*K* matt*E*r by *S*upernova neutrinos
 
 
-`dukes` is a package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on `arXiv:24xx.xxxxx`.
+`dukes` is a package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on arXiv:24xx.xxxxx.
+`dukes` also supports implementation of phenomenlogical-model-dependent differential cross sections between DM-neutrino and DM-electron for calculating BDM signatures (*experimental*).
 
 ## Installation
 
