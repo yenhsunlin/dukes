@@ -356,22 +356,22 @@ def vBDM(Tx,mx) -> float:
     return _np.sqrt(Tx*(Tx + 2*mx))/(Tx + mx)
 
 
-def dsigma0(Ev,thetaCM) -> float:
-    """
-    Differential DM-neutrino scattering cross section in CM frame
-    
-    In
-    ------
-    Ev: incoming SN neutrino energy, MeV
-    thetaCM: Scattering angle in CM frame, rad
-    
-    Out
-    ------
-    dsigma0: cm^2 per steradian
-    """
-    # this is energy-independent cross section
-    # divided by 4*np implying isotropic in CM frame
-    return 1e-35/4/_np.pi
+#def dsigma0(Ev,thetaCM) -> float:
+#    """
+#    Differential DM-neutrino scattering cross section in CM frame
+#    
+#    In
+#    ------
+#    Ev: incoming SN neutrino energy, MeV
+#    thetaCM: Scattering angle in CM frame, rad
+#    
+#    Out
+#    ------
+#    dsigma0: cm^2 per steradian
+#    """
+#    # this is energy-independent cross section
+#    # divided by 4*np implying isotropic in CM frame
+#    return 1e-35/4/_np.pi
 
 
 def supernovaNuFlux(Ev,l) -> float:
@@ -427,7 +427,8 @@ class dbdmSpectrum(constant):
             dEvdTx = _dEv(Tx,mx,thetaCM)
             vx = vBDM(Tx,mx)  #  
             nx = dmNumberDensity(r,mx,MG,is_spike,sigv,tBH,rhosMW,rsMW,eta)
-            return l**2*_np.sin(theta)*_np.sin(thetaCM)*nx*dsigma0(Ev,thetaCM)*supernovaNuFlux(Ev,l)*(dEvdTx*vx)
+            dsigma0 = constant.sigma0/4/np.pi
+            return l**2*_np.sin(theta)*_np.sin(thetaCM)*nx*dsigma0*supernovaNuFlux(Ev,l)*(dEvdTx*vx)
         else:
             return 0
     
@@ -473,11 +474,13 @@ class dbdmSpectrum(constant):
 
 
 def flux(Tx,mx,                                                           \
-             R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,      \
-             sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, \
-             nitn=10,neval=50000):
+         R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,      \
+         sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, \
+         nitn=10,neval=50000):
     """
-    DBDM flux for given (Tx,mx)
+    DBDM flux for given (Tx,mx) assuming isotropic and energy-independent
+    differential DM-nuetrino cross section in CM frame with the value
+    1e-35/4/pi cm^2/std
     
     In
     ------
@@ -503,7 +506,7 @@ def flux(Tx,mx,                                                           \
     ------
     Flux: per MeV per cm^2 per second
     """
-    preFactor = constant.MagicalNumber #constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
+    preFactor = constant.MagicalNumber  # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
@@ -524,11 +527,14 @@ def flux(Tx,mx,                                                           \
 
 
 def event(mx,                                                                          \
-              TxRange=[5,100],R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,  \
-              sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             \
-              nitn=10,neval=50000):
+          TxRange=[5,100],R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,  \
+          sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             \
+          nitn=10,neval=50000):
     """
-    DBDM event for given mx
+    DBDM event per electron for given mx assuming isotropic and energy-
+    independent differential DM-nuetrino cross section in CM frame with
+    the value 1e-35/4/pi cm^2/std. The total DM-electron cross section
+    is assumed 1e-35 cm^2
     
     In
     ------
@@ -552,9 +558,10 @@ def event(mx,                                                                   
     
     Out
     ------
-    Event: per cm^2 per second
+    Event: per electron per second
     """
-    preFactor = constant.MagicalNumber #constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
+    preFactor = constant.MagicalNumber  # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
+    preFactor *= constant.sigma0        # multiplying DM-electron cross section
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
