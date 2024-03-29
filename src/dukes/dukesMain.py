@@ -427,7 +427,7 @@ class dbdmSpectrum(constant):
             dEvdTx = _dEv(Tx,mx,thetaCM)
             vx = vBDM(Tx,mx)  #  
             nx = dmNumberDensity(r,mx,MG,is_spike,sigv,tBH,rhosMW,rsMW,eta)
-            dsigma0 = constant.sigma0/4/np.pi
+            dsigma0 = constant.sigma0/4/_np.pi  # differential DM-nu cross section in CM frame, cm^2/sr
             return l**2*_np.sin(theta)*_np.sin(thetaCM)*nx*dsigma0*supernovaNuFlux(Ev,l)*(dEvdTx*vx)
         else:
             return 0
