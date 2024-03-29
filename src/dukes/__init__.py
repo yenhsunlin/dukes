@@ -20,3 +20,4 @@ __url__          = 'https://github.com/yenhsunlin/dukes'
 __license__      = 'GNU GPL-3.0'
 
 from .dukesMain import *
+from .galDensity import generalDensityProfile,mwDensityProfile,galacticDensityProfile
