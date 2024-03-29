@@ -13,7 +13,7 @@
 
 __name__         = 'dukes'
 __version__      = '1.1.2'
-__description__  = 'Diffuse boosted dark matter from supernova neutrinos in early Universe'
+__description__  = 'This package evaluates the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe'
 __author__       = 'Yen-Hsun Lin'
 __email__        = 'yenhsun@phys.ncku.edu.tw'
 __url__          = 'https://github.com/yenhsunlin/dukes'
