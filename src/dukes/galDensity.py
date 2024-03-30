@@ -18,7 +18,7 @@ from scipy.interpolate import CubicSpline as _CubicSpline
 from scipy.interpolate import RegularGridInterpolator as _RegularGridInterpolator
 from scipy.integrate import quad as _quad
 from .dat.densityParamFit import _MG_density_data,_rho_b0_data,_Sigma0Thick_data,_Sigma0Thin_data
-from .dat.galcticAreaDensityFit import _R_data,_MG_area_data,_rho_data
+from .dat.galacticAreaDensityFit import _R_data,_MG_area_data,_rho_data
 
 
 
