@@ -49,7 +49,7 @@ class haloSpike(constant):
         ------
         normalization N
         """
-        Rs = radiusSchwarzchild(mBH)
+        Rs = radiusSchwarzschild(mBH)
         ri = 4*Rs
         rh = 0.65e-3
         alpha = 3/2
@@ -80,7 +80,7 @@ class haloSpike(constant):
         return (N/rhos/rs)**(3/4)*self.rh**(5/8)
     
     def _rhoPrime(self,r,mBH,rhos,rs) -> float:
-        Rs = radiusSchwarzchild(mBH)
+        Rs = radiusSchwarzschild(mBH)
         ri = 4*Rs
         N = self._normN(mBH)
         Rsp = self._radiusSpike(mBH,rhos,rs)
@@ -114,7 +114,7 @@ class haloSpike(constant):
         """
         #mHalo = eta*MG
         mBH = massBH(MG,eta)
-        Rs = radiusSchwarzchild(mBH)
+        Rs = radiusSchwarzschild(mBH)
         ri = 4*Rs
         rs = get_rs(MG,rsMW)  # get the scaled rs from MG
         
@@ -235,9 +235,9 @@ def massBH(MG,eta=24.38) -> float:
     return 7e7*(eta*MG/1e12)**(4/3)
 
 
-def radiusSchwarzchild(mBH) -> float:
+def radiusSchwarzschild(mBH) -> float:
     """
-    Calculating the Schawarzchild radius 
+    Calculating the Schawarzschild radius 
 
     In
     ------
@@ -245,7 +245,7 @@ def radiusSchwarzchild(mBH) -> float:
 
     Ou
     ------
-    Rs: Schwarzchild radius, kpc
+    Rs: Schwarzschild radius, kpc
     """
     mBH = mBH*constant.Msun_kg
     Rs = mBH*1.48e-25/constant.kpc2cm  # convert Rs into kpc
