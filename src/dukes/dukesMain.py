@@ -212,7 +212,6 @@ def nxNFW(r,mx,rhosMW=184,rsMW=24.42,MG=None) -> float:
     number density: per cm^3
     """
     if MG is None:
-        rr = r/rs
         return rhox(r,rhosMW,rsMW)/mx
     else:
         rs = get_rs(MG,rsMW)
