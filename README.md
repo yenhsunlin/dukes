@@ -28,7 +28,7 @@ The versions of these dependencies are not strict, but are recommended to update
 
 ## Usage
 
-We briefly summarize the usage in this section and a comprehensive tutorial can be found in the jupyter notebook stored in `tutorial/tutorial.ipynb`.
+We briefly summarize the usage in this section and a comprehensive tutorial can be found in the jupyter notebook in `tutorial/tutorial.ipynb`.
 
 To import, do
 
