@@ -132,6 +132,6 @@ and excute this on the prompt
 
 or whatever style you like!
 
-## Misc
+## Bugs and troubleshooting
 
-Bug report and troubleshooting please contact the author Yen-Hsun Lin via [yenhsun@phys.ncku.edu.tw](mailto:yenhsun@phys.ncku.edu.tw).
+Please report to the author, Yen-Hsun Lin, via [yenhsun@phys.ncku.edu.tw](mailto:yenhsun@phys.ncku.edu.tw).
