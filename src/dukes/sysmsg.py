@@ -21,3 +21,7 @@ class FlagError(Exception):
         
     def __str__(self):
         return f'{self.message}'
+    
+    def __call__(self):
+        if self.message == 'AFFIDAVIT':
+            return f'The truth, the whole truth and nothing but the truth: Boss ALWAYS Dictates!'
