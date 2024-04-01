@@ -1,8 +1,8 @@
 # dukes: *D*iff*U*se-boosted dar*K* matt*E*r by *S*upernova neutrinos
 
 
-`dukes` is a package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on arXiv:24xx.xxxxx.
-`dukes` also supports implementation of phenomenlogical-model-dependent differential cross sections between DM-neutrino and DM-electron for calculating BDM signatures (*experimental*).
+`dukes` is a pyhon package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on arXiv:24xx.xxxxx.
+It also supports an *experimental* feature that implements particle-model-dependent differential cross sections for DM-$\nu$ and DM-$e$.
 
 ## Installation
 
@@ -14,7 +14,7 @@ and everything should be processed on-the-fly.
 
 ### Dependency
 
-`dukes` requires these external packages
+`dukes` requires python >= 3.6 and following packages
 
 - `numpy` >= 1.20.0
 - `scipy` >= 1.10.0
@@ -55,7 +55,7 @@ Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluate
 
 #### The diffuse BDM flux
 
-The averaged diffuse BDM (DBDM) flux on the Earth is given by
+The averaged diffuse BDM (DBDM) flux at redshift $z=0$ is given by
 
 $$
 \frac{d\Phi_\chi}{dT_\chi} = \frac{v_\chi}{H_0} \int_0^{z_{\rm max}} \frac{dz}{\varepsilon(z)}  \int dM_G \frac{d\Gamma_{{\rm SN}}(z)}{dM_G}\frac{d\bar N_\chi(M_G)}{dT_\chi^\prime}. 
@@ -108,7 +108,7 @@ and year to seconds
 
 ### Scripting
 
-In python script (see subsidiary `tests/dukes_example.py`), one can write
+In python script (see `tests/dukes_example.py`), one can write
 
     # dukes_example.py
 
