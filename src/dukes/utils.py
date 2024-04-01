@@ -152,7 +152,7 @@ class userPhenoModelInterface(constant):
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
-        if Txp < 200:  # discard the BDM signature if it requires Ev > 200 MeV at z 
+        if Txp < 150:  # discard the BDM signature if it requires Ev > 150 MeV at z 
             MG = 10**m
             return MG*dnG(m,z)/_E(z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,MG,R,l,theta,thetaCM_vx,is_spike,sigv,
                                                                      tBH,rhosMW,rsMW,eta)
@@ -164,7 +164,7 @@ class userPhenoModelInterface(constant):
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx 
-        if Txp < 200:  # discard the BDM signature if it requires Ev > 200 MeV at z
+        if Txp < 150:  # discard the BDM signature if it requires Ev > 150 MeV at z
             MG = 10**m
             # adopt fitting data for galactic area density?
             if usefit is True:
@@ -180,7 +180,7 @@ class userPhenoModelInterface(constant):
             return 0
 
     def flux(self,Tx,mx,                                                           
-             R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,      
+             R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,      
              sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, 
              nitn=10,neval=50000) -> float:
         """
@@ -230,7 +230,7 @@ class userPhenoModelInterface(constant):
         return flux
 
     def event(self,mx,                                                                                                                
-          TxRange=[5,100],R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,  
+          TxRange=[5,30],R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,  
           sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             
           nitn=10,neval=50000) -> float:
         """
