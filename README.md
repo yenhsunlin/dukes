@@ -103,7 +103,7 @@ Conversion factors such as converting kiloparsec to centimeters
 and year to seconds
 
     >>> dukes.constant.year2Seconds
-    31560000.0
+    31556926
 
 
 ### Scripting
