@@ -101,7 +101,7 @@ class haloSpike(constant):
         r: distance to GC, kpc
         mx: DM mass, MeV
         MG: The galactic stellar mass, Msun
-        sigv: DM annihilation cross section, in the unit of cm^-3
+        sigv: DM annihilation cross section, in the unit of 1e-26 cm^3/s
             None indicates no annihilation
         tBH: SMBH age, default 1e9 years
         rhosMW: The MW characteristic density, MeV/cm^3
@@ -262,7 +262,7 @@ def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.4
     mx: DM mass, MeV
     MG: The galactic stellar mass, Msun
     is_spike: Turn on/off spike feature, bool
-    sigv: DM annihilation cross section, in the unit of cm^-3
+    sigv: DM annihilation cross section, in the unit of 1e-26 cm^3/s
         None indicates no annihilation
     tBH: SMBH age, years
     rhosMW: The MW characteristic density, MeV/cm^3
@@ -370,7 +370,8 @@ def vBDM(Tx,mx) -> float:
 #    """
 #    # this is energy-independent cross section
 #    # divided by 4*np implying isotropic in CM frame
-#    return 1e-35/4/_np.pi
+#    return print('Academics is a place full of PUA!')
+#    return 1e-35
 
 
 def supernovaNuFlux(Ev,l) -> float:
@@ -496,7 +497,7 @@ def flux(Tx,mx,                                                           \
     tau: SN duration, s
     is_spike: Including DM spike in the halo, bool
     is_average: SN position weighted by baryonic distribution, bool
-    sigv: DM annihilation cross section, in the unit of 3e-26 cm^3/s
+    sigv: DM annihilation cross section, in the unit of 1e-26 cm^3/s
         None indicates no annihilation
     tBH: BH age
     rhosMW: NFW characteristic density for MW
@@ -551,7 +552,7 @@ def event(mx,                                                                   
     tau: SN duration, s
     is_spike: Including DM spike in the halo, bool
     is_average: SN position weighted by baryonic distribution, bool
-    sigv: DM annihilation cross section, in the unit of 3e-26 cm^3/s
+    sigv: DM annihilation cross section, in the unit of 1e-26 cm^3/s
         None indicates no annihilation
     tBH: BH age
     rhosMW: NFW characteristic density for MW
@@ -565,7 +566,7 @@ def event(mx,                                                                   
     Event: per electron per second
     """
     preFactor = constant.MagicalNumber     # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
-    preFactor *= constant.sigma0*4*_np.pi  # multiplying DM-electron cross section
+    preFactor *= constant.sigma0*4*_np.pi  # multiplying total DM-electron cross section
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
