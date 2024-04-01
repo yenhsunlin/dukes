@@ -52,7 +52,7 @@ class constant:
     # conversion factors 
     md2MeVperCubicCM = 3.796e-05        # Msun/kpc^3 to MeV/cm^3
     md2MeVperQuadCM  = 1.171e+17        # Msun/kpc^3 to MeV/cm^2
-    year2Seconds     = 3.156e+07        # year to seconds
+    year2Seconds     = 31556926         # year to seconds
     erg2MeV          = 6.241e+05        # erg to MeV
     kpc2cm           = 3.085e+21        # kpc to cm
     
@@ -72,7 +72,7 @@ class constant:
     sigma0           = 1.000e-35        # sigma_0, cm^2
 
     # physical constants
-    c                = 2.998e+10        # light speed, cm/s
+    c                = 29979245800      # light speed, cm/s
     H0               = 7.300e+10        # Hubble constant, km/s/Mpc
     rho_c            = 1.500e-07        # critical density, Msun/pc^3
     Lv               = 3.000e+52/6      # Supernova neutrino luminosity (single specie), erg/s
@@ -83,4 +83,4 @@ class constant:
     D_H0             = 4.280e+03        # Mpc
     G                = 6.674e-11        # Newton gravitational constant, meter^3 kg^-1 s^-2
 
-    MagicalNumber    = 2.572e-64
+    MagicalNumber    = 2.572e-64        # Magician does Magic!
