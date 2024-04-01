@@ -14,7 +14,7 @@ and everything should be processed on-the-fly.
 
 ### Dependency
 
-`dukes` requires python >= 3.6 and following packages
+`dukes` requires python >= 3.6 and the following packages
 
 - `numpy` >= 1.20.0
 - `scipy` >= 1.10.0
