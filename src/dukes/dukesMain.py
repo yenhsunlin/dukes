@@ -421,7 +421,7 @@ class dbdmSpectrum(constant):
         dNx/dTx
         """
         r = _get_r(l,R,theta)
-        if r >= 1e-8:
+        if 1-8 <= r < 100:
             Ev = snNuEenergy(Tx,mx,thetaCM)
             dEvdTx = _dEv(Tx,mx,thetaCM)
             vx = vBDM(Tx,mx)  #  
@@ -436,7 +436,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
-        if Txp < 500:  # discard the BDM signature if it requires Ev > 500 MeV at z 
+        if Txp < 150:  # discard the BDM signature if it requires Ev > 130 MeV at z 
             MG = 10**m
             return MG*rhoDotSFR(z)*dnG(m,z)/_E(z)*self._diffSpectrum(Txp,mx,
                                                                      MG,R,l,theta,
@@ -450,7 +450,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx 
-        if Txp < 500:  # discard the BDM signature if it requires Ev > 500 MeV at z
+        if Txp < 150:  # discard the BDM signature if it requires Ev > 130 MeV at z
             MG = 10**m
             # adopt fitting data for galactic area density?
             if usefit is True:
@@ -477,7 +477,7 @@ class dbdmSpectrum(constant):
 
 
 def flux(Tx,mx,                                                           \
-         R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,      \
+         R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,      \
          sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, \
          nitn=10,neval=50000):
     """
@@ -531,7 +531,7 @@ def flux(Tx,mx,                                                           \
 
 
 def event(mx,                                                                          \
-          TxRange=[5,100],R=0,Rmax=500,rmax=500,tau=10,is_spike=True,is_average=True,  \
+          TxRange=[5,30],R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,  \
           sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             \
           nitn=10,neval=50000):
     """
