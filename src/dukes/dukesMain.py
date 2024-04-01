@@ -426,7 +426,7 @@ class dbdmSpectrum(constant):
             dEvdTx = _dEv(Tx,mx,thetaCM)
             vx = vBDM(Tx,mx)  #  
             nx = dmNumberDensity(r,mx,MG,is_spike,sigv,tBH,rhosMW,rsMW,eta)
-            dsigma0 = constant.sigma0/4/_np.pi  # differential DM-nu cross section in CM frame, cm^2/sr
+            dsigma0 = constant.sigma0  # differential DM-nu cross section in CM frame, cm^2/sr
             return l**2*_np.sin(theta)*_np.sin(thetaCM)*nx*dsigma0*supernovaNuFlux(Ev,l)*(dEvdTx*vx)
         else:
             return 0
@@ -436,10 +436,12 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
-        if Txp < 200:  # discard the BDM signature if it requires Ev > 200 MeV at z 
+        if Txp < 500:  # discard the BDM signature if it requires Ev > 500 MeV at z 
             MG = 10**m
-            return MG*dnG(m,z)/_E(z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,MG,R,l,theta,thetaCM,is_spike,sigv, \
-                                                                    tBH,rhosMW,rsMW,eta)
+            return MG*rhoDotSFR(z)*dnG(m,z)/_E(z)*self._diffSpectrum(Txp,mx,
+                                                                     MG,R,l,theta,
+                                                                     thetaCM,
+                                                                     is_spike,sigv,tBH,rhosMW,rsMW,eta)
         else:
             return 0
         
@@ -448,7 +450,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx 
-        if Txp < 200:  # discard the BDM signature if it requires Ev > 200 MeV at z
+        if Txp < 500:  # discard the BDM signature if it requires Ev > 500 MeV at z
             MG = 10**m
             # adopt fitting data for galactic area density?
             if usefit is True:
@@ -458,8 +460,10 @@ class dbdmSpectrum(constant):
             else:
                 raise FlagError('Global flag \'usefit\' must be a boolean.')
             
-            return 2*_np.pi*R*galArealDensity*dnG(m,z)/_E(z)*rhoDotSFR(z)*self._diffSpectrum(Tx,mx,MG,R,l,theta,thetaCM, \
-                                                                                           is_spike,sigv,tBH,rhosMW,rsMW,eta)
+            return 2*_np.pi*rhoDotSFR(z)*R*galArealDensity*dnG(m,z)/_E(z)*self._diffSpectrum(Txp,mx,
+                                                                                             MG,R,l,theta,
+                                                                                             thetaCM,
+                                                                                             is_spike,sigv,tBH,rhosMW,rsMW,eta)    
         else:
             return 0
     
@@ -506,6 +510,7 @@ def flux(Tx,mx,                                                           \
     Flux: per MeV per cm^2 per second
     """
     preFactor = constant.MagicalNumber  # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
+                                        # 0.017: SN in MW per year; 1e6: converting Mpc^2 to kpc^2
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
@@ -559,8 +564,8 @@ def event(mx,                                                                   
     ------
     Event: per electron per second
     """
-    preFactor = constant.MagicalNumber  # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
-    preFactor *= constant.sigma0        # multiplying DM-electron cross section
+    preFactor = constant.MagicalNumber     # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
+    preFactor *= constant.sigma0*4*_np.pi  # multiplying DM-electron cross section
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
