@@ -2,7 +2,7 @@
 
 
 `dukes` is a pyhon package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on arXiv:24xx.xxxxx.
-It also supports an *experimental* feature that implements particle-model-dependent differential cross sections for DM-$\nu$ and DM-$e$.
+It also supports an *experimental* feature that implements particle-model-dependent differential cross sections for DM-neutrino and DM-electron.
 
 ## Installation
 
