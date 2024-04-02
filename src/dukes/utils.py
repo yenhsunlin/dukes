@@ -128,7 +128,7 @@ class userPhenoModelInterface(constant):
     is used when evaluating event.
     """
 
-    def __init__(self,func1,func2):
+    def __init__(self,func1,func2, /):  # positional-only
         self.dsigmaNu = func1  # differential DM-nu cross section, takes 3 arguments: (Ev,mx,thetaCM_vx)
         self.dsigmaE = func2   # differential DM-e cross section, takes 3 arguments: (Tx,mx,thetaCM_xe)
     
@@ -179,7 +179,7 @@ class userPhenoModelInterface(constant):
         else:
             return 0
 
-    def flux(self,Tx,mx,                                                           
+    def flux(self,Tx,mx,                                                          
              R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,      
              sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, 
              nitn=10,neval=50000) -> float:
