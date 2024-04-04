@@ -73,7 +73,7 @@ class constant:
 
     # physical constants
     c                = 29979245800      # light speed, cm/s
-    H0               = 7.300e+10        # Hubble constant, km/s/Mpc
+    H0               = 7.300e+01        # Hubble constant, km/s/Mpc
     rho_c            = 1.500e-07        # critical density, Msun/pc^3
     Lv               = 3.000e+52/6      # Supernova neutrino luminosity (single specie), erg/s
     Omega_0m         = 3.150e-01        # Cosmological matter fraction
