@@ -437,7 +437,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
-        tBH = cosmicAgeFit(z)*1e9
+        tBH = cosmicAgeFit(z)*1e9 # convert to years
         if Txp < 150:  # discard the BDM signature if it requires Ev > 130 MeV at z 
             MG = 10**m
             return MG*rhoDotSFR(z)*dnG(m,z)/_E(z)*self._diffSpectrum(Txp,mx,
@@ -452,7 +452,7 @@ class dbdmSpectrum(constant):
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx 
-        tBH = cosmicAgeFit(z)*1e9
+        tBH = cosmicAgeFit(z)*1e9 # convert to years
         if Txp < 150:  # discard the BDM signature if it requires Ev > 130 MeV at z
             MG = 10**m
             # adopt fitting data for galactic area density?
