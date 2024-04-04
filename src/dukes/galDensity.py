@@ -19,7 +19,7 @@ from scipy.interpolate import RegularGridInterpolator as _RegularGridInterpolato
 from scipy.integrate import quad as _quad
 from .dat.densityParamFit import _MG_density_data,_rho_b0_data,_Sigma0Thick_data,_Sigma0Thin_data
 from .dat.galacticAreaDensityFit import _R_data,_MG_area_data,_rho_data
-
+from .dat.cosmicAgeFit import _z_data,_age_data
 
 
 ##########################################################################
@@ -53,6 +53,7 @@ _rho_b0Fit = _CubicSpline(_MG_density_data,_rho_b0_data)
 _Sigma0ThinFit = _CubicSpline(_MG_density_data,_Sigma0Thin_data)
 _Sigma0ThickFit = _CubicSpline(_MG_density_data,_Sigma0Thick_data)
 galacticAreaDensityFit = _RegularGridInterpolator((_R_data,_MG_area_data),_rho_data)
+cosmicAgeFit = _CubicSpline(_z_data,_age_data)
 
 
 
