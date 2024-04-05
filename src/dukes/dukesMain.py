@@ -297,7 +297,7 @@ def radiusSchwarzschild(mBH) -> float:
     return Rs
 
 
-def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,rh=0.65e-3) -> float:
+def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856) -> float:
     """
     Obtain the DM number density at given r with arbitrary MG
     
@@ -320,7 +320,7 @@ def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.4
     """
     if is_spike is True:
         nx = haloSpike()
-        return nx(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta,rh)
+        return nx(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta)
     elif is_spike is False:       
         return nxNFW(r,mx,rhosMW,rsMW,MG)
     else:
