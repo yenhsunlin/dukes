@@ -35,15 +35,48 @@ class haloSpike(constant):
     Class for DM halo with spike scaled to arbitrary galactic mass MG
     """
     def __init__(self):
-        self.rh = 0.65e-3
+        pass
     
-    def _normN(self,mBH) -> float:
+    def _M_sigma(self,mBH):
+        """
+        Faber–Jackson law for black holes
+
+        In
+        ---
+        mBH: SMBH mass, Msun
+
+        Out
+        ---
+        sigma: stellar velocity dispersion, km/s
+        """
+        return 200*(mBH/1e8/1.9)**(1/5.1)
+    
+    def _rh(self,MG,eta):
+        """
+        SMBH influence radius
+
+        In
+        ---
+        MG: galactic mass, Msun
+        eta: the ratio of MG/Mhalo
+
+        Out
+        ---
+        rh: influence radisu, kpc
+        """
+        mBH = massBH(MG,eta)
+        sigma = self._M_sigma(mBH)
+        rh = self.G*mBH/sigma**2 # pc
+        return rh*1e-3 # kpc
+
+    def _normN(self,mBH,rh) -> float:
         """
         The normalization N
         
         In
         ------
         mBH: SMBH mass, Msun
+        rh: SMBH influence radius, kpc
         
         Out
         ------
@@ -51,7 +84,6 @@ class haloSpike(constant):
         """
         Rs = radiusSchwarzschild(mBH)
         ri = 4*Rs
-        rh = 0.65e-3
         alpha = 3/2
         
         def _fa(r,alpha):
@@ -61,13 +93,14 @@ class haloSpike(constant):
         norm = mBH*self.Msun/4/_np.pi/(fh - fi)
         return norm
 
-    def _radiusSpike(self,mBH,rhos,rs) -> float:
+    def _radiusSpike(self,mBH,rh,rhos,rs) -> float:
         """
         Get the spike radius
 
         In
         ------
-        mH: SMBH mass, Msun
+        mBH: SMBH mass, Msun
+        rh: SMBH influence radius, kpc
         rhos: characteristic density, MeV/cm^3
         rs: characteristic radius, kpc
 
@@ -75,24 +108,24 @@ class haloSpike(constant):
         ------
         R_spike: Spike radius, kpc
         """
-        N = self._normN(mBH)
+        N = self._normN(mBH,rh)
         rhos = rhos*self.kpc2cm**3
-        return (N/rhos/rs)**(3/4)*self.rh**(5/8)
+        return (N/rhos/rs)**(3/4)*rh**(5/8)
     
-    def _rhoPrime(self,r,mBH,rhos,rs) -> float:
+    def _rhoPrime(self,r,mBH,rh,rhos,rs) -> float:
         Rs = radiusSchwarzschild(mBH)
         ri = 4*Rs
-        N = self._normN(mBH)
-        Rsp = self._radiusSpike(mBH,rhos,rs)
-        rhoN = N/self.rh**(3/2)
-        rhoNp = rhoN*(self.rh/Rsp)**(7/3)
-        if ri <= r < self.rh:
-            rhoP = rhoN*(1 - ri/r)**3*(self.rh/r)**(3/2)
+        N = self._normN(mBH,rh)
+        Rsp = self._radiusSpike(mBH,rh,rhos,rs)
+        rhoN = N/rh**(3/2)
+        rhoNp = rhoN*(rh/Rsp)**(7/3)
+        if ri <= r < rh:
+            rhoP = rhoN*(1 - ri/r)**3*(rh/r)**(3/2)
         else:
             rhoP = rhoNp*(Rsp/r)**(7/3)
         return rhoP/self.kpc2cm**3
 
-    def _nxSpike(self,r,mx,MG,sigv,tBH,rhosMW,rsMW,eta) -> float:
+    def _nxSpike(self,r,mx,MG,sigv,tBH,rhosMW,rsMW,eta,rh) -> float:
         """
         DM number density with spike in the center
 
@@ -107,6 +140,7 @@ class haloSpike(constant):
         rhosMW: The MW characteristic density, MeV/cm^3
         rsMW: The MW characteristic radius, kpc
         eta: the ratio of MG/Mhalo
+        rh: SMBH influence radius, kpc
 
         Out
         ------
@@ -119,28 +153,29 @@ class haloSpike(constant):
         rs = get_rs(MG,rsMW)  # get the scaled rs from MG
         
         if sigv is None:
-            Rsp = self._radiusSpike(mBH,rhosMW,rs)
+            Rsp = self._radiusSpike(mBH,rh,rhosMW,rs)
             if r < ri:
                 return 0
             elif ri <= r < Rsp:
-                return self._rhoPrime(r,mBH,rhosMW,rs)/mx
+                return self._rhoPrime(r,mBH,rh,rhosMW,rs)/mx
             else:
                 return rhox(r,rhosMW,rs)/mx
         else:
-            Rsp = self._radiusSpike(mBH,rhosMW,rs)
+            Rsp = self._radiusSpike(mBH,rh,rhosMW,rs)
             sigv = sigv*1e-26
             rhoc = mx/sigv/tBH/self.year2Seconds
             if r < ri:
                 return 0
             elif ri <= r < Rsp:
-                rhoP = self._rhoPrime(r,mBH,rhosMW,rs)
+                rhoP = self._rhoPrime(r,mBH,rh,rhosMW,rs)
                 return rhoP*rhoc/(rhoP + rhoc)/mx
             else:
                 rhoDM = rhox(r,rhosMW,rs)
                 return rhoDM*rhoc/(rhoDM + rhoc)/mx
     
     def __call__(self,r,mx,MG,sigv,tBH,rhosMW,rsMW,eta):
-        return self._nxSpike(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta)
+        rh = self._rh(MG,eta) # SMBH influence radius in kpc
+        return self._nxSpike(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta,rh)
 
 
 def rhox(r,rhos,rs) -> float:
@@ -173,7 +208,10 @@ def get_rmax(MG) -> float:
     ------
     rmax: kpc
     """
-    return (MG/constant.Mmw)**(1/3)*constant.Rhalo
+    if MG is None:
+        return constant.Rhalo
+    else:
+        return (MG/constant.Mmw)**(1/3)*constant.Rhalo
 
 
 def get_rs(MG,rsMW=24.42) -> float:
@@ -189,12 +227,15 @@ def get_rs(MG,rsMW=24.42) -> float:
     ------
     rs: kpc
     """
-    return (MG/constant.Mmw)**(1/3)*rsMW
+    if MG is None:
+        return rsMW
+    else:
+        return (MG/constant.Mmw)**(1/3)*rsMW
 
 
 def nxNFW(r,mx,rhosMW=184,rsMW=24.42,MG=None) -> float:
     """
-    DM number density at r for arbitrary MG
+    DM number density at r for arbitrary MG without spike
     
     In
     ------
@@ -232,7 +273,11 @@ def massBH(MG,eta=24.38) -> float:
     ------
     SMBH mass: Msun
     """
-    return 7e7*(eta*MG/1e12)**(4/3)
+    if MG is None:
+        # MW case
+        return 4.3e6
+    else:
+        return 7e7*(eta*MG/1e12)**(4/3)
 
 
 def radiusSchwarzschild(mBH) -> float:
@@ -252,7 +297,7 @@ def radiusSchwarzschild(mBH) -> float:
     return Rs
 
 
-def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856) -> float:
+def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856,rh=0.65e-3) -> float:
     """
     Obtain the DM number density at given r with arbitrary MG
     
@@ -275,7 +320,7 @@ def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.4
     """
     if is_spike is True:
         nx = haloSpike()
-        return nx(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta)
+        return nx(r,mx,MG,sigv,tBH,rhosMW,rsMW,eta,rh)
     elif is_spike is False:       
         return nxNFW(r,mx,rhosMW,rsMW,MG)
     else:
