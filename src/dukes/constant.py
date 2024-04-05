@@ -81,6 +81,6 @@ class constant:
     Omega_0r         = 2.300e-03        # Cosmological radiation fraction
     Omega_0          = 1.000            # Cosmological total energy
     D_H0             = 4.280e+03        # Mpc
-    G                = 6.674e-11        # Newton gravitational constant, meter^3 kg^-1 s^-2
+    G                = 4.301e-03        # Newton gravitational constant, pc Msun^-1 (km/s)^2
 
     MagicalNumber    = 2.572e-64        # Magician does Magic!
