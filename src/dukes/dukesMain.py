@@ -297,7 +297,7 @@ def radiusSchwarzschild(mBH) -> float:
     return Rs
 
 
-def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e9,rhosMW=184,rsMW=24.42,eta=24.3856) -> float:
+def dmNumberDensity(r,mx,MG,is_spike=True,sigv=None,tBH=1e10,rhosMW=184,rsMW=24.42,eta=24.3856) -> float:
     """
     Obtain the DM number density at given r with arbitrary MG
     
