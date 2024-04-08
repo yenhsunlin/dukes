@@ -562,7 +562,7 @@ def flux(Tx,mx,                                                           \
     spectrum  = dbdmSpectrum()
     if is_average is True:
         integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,R,l,theta,thetaCM)
-        result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5], \
+        result = integrator(lambda x: x[2]*spectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5], \
                                                is_spike=is_spike,is_weighted=is_average,sigv=sigv,      \
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit),nitn=nitn,neval=neval).mean
         flux = 4*_np.pi**2*tau*result*constant.kpc2cm**3*vBDM(Tx,mx)*preFactor
