@@ -467,7 +467,7 @@ class dbdmSpectrum(constant):
         dNx/dTx
         """
         r = _get_r(l,R,theta)
-        if 1-8 <= r < 100:
+        if 1e-10 <= r < 100:
             Ev = snNuEenergy(Tx,mx,thetaCM)
             dEvdTx = _dEv(Tx,mx,thetaCM)
             vx = vBDM(Tx,mx)  #  
@@ -477,22 +477,22 @@ class dbdmSpectrum(constant):
         else:
             return 0
     
-    def _dbdmSpectrum(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta):
+    def _dbdmSpectrum(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta) -> float:
         """
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
         tBH = cosmicAgeFit(z)*1e9 # convert to years
-        if Txp < 150:  # discard the BDM signature if it requires Ev > 130 MeV at z 
+        if Txp < 150:  # discard the BDM signature if it requires Ev > 150 MeV at z 
             MG = 10**m
-            return MG*rhoDotSFR(z)*dnG(m,z)/_E(z)*self._diffSpectrum(Txp,mx,
-                                                                     MG,R,l,theta,
-                                                                     thetaCM,
-                                                                     is_spike,sigv,tBH,rhosMW,rsMW,eta)
+            return MG*dnG(m,z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,
+                                                               MG,R,l,theta,
+                                                               thetaCM,
+                                                               is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
         else:
             return 0
         
-    def _dbdmSpectrumWeighted(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta,usefit):
+    def _dbdmSpectrumWeighted(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta,usefit) -> float:
         """
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
@@ -506,12 +506,12 @@ class dbdmSpectrum(constant):
             elif usefit is False:
                 galArealDensity = galacticAreaDensity(R,zRange=[-10,10],MG=MG)
             else:
-                raise FlagError('Global flag \'usefit\' must be a boolean.')
+                raise FlagError('Flag \'usefit\' must be a boolean.')
             
-            return (2*_np.pi*R)*rhoDotSFR(z)*R*galArealDensity*dnG(m,z)/_E(z)*self._diffSpectrum(Txp,mx,
-                                                                                             MG,R,l,theta,
-                                                                                             thetaCM,
-                                                                                             is_spike,sigv,tBH,rhosMW,rsMW,eta)    
+            return (2*_np.pi*R)*rhoDotSFR(z)*R*galArealDensity*dnG(m,z)*self._diffSpectrum(Txp,mx,
+                                                                                           MG,R,l,theta,
+                                                                                           thetaCM,
+                                                                                           is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)    
         else:
             return 0
     
