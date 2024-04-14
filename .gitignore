@@ -32,4 +32,4 @@ pip-wheel-metadata/
 # Test
 #tests/
 test.*
-.virtual_documents/tutorial/tutorial.ipynb
+.virtual_documents/
