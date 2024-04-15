@@ -178,10 +178,10 @@ class userPhenoModelInterface(constant):
             else:
                 raise FlagError('Flag \'usefit\' must be a boolean.')
             
-            return (2*_np.pi*R)*rhoDotSFR(z)*R*galArealDensity*dnG(m,z)*self._diffSpectrum(Txp,mx,
-                                                                                           MG,R,l,theta,
-                                                                                           thetaCM_vx, 
-                                                                                           is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
+            return (2*_np.pi*R)*rhoDotSFR(z)*galArealDensity*dnG(m,z)*self._diffSpectrum(Txp,mx,
+                                                                                         MG,R,l,theta,
+                                                                                         thetaCM_vx, 
+                                                                                         is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
         else:
             return 0
 
