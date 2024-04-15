@@ -1,8 +1,15 @@
 # dukes: *D*iff*U*se-boosted dar*K* matt*E*r by *S*upernova neutrinos
 
 
-`dukes` is a pyhon package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on arXiv:24xx.xxxxx.
+`dukes` is a pyhon package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on [arXiv:2404.08528](https://arxiv.org/abs/2404.08528).
 It also supports an *experimental* feature that implements particle-model-dependent differential cross sections for DM-neutrino and DM-electron.
+
+### Citation
+
+If you use this package or part of the code in your research, please cite the following:
+
+1. Yen-Hsun Lin and Meng-Ru Wu, *Echoes of darkness: Supernova-neutrino-boosted dark matter from all galaxies*, arXiv:2404.08528
+2. `dukes`: https://github.com/yenhsunlin/dukes
 
 ## Installation
 
