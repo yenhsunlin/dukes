@@ -1,8 +1,14 @@
+[![Python](https://img.shields.io/badge/python-3.8-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/License-GPL_3.0-blue.svg)](https://choosealicense.com/licenses/gpl-3.0/)
+[![ArXiv](https://img.shields.io/badge/arXiv-2404.08528-yellowgreen.svg)](https://arxiv.org/abs/2404.08528) 
+
+
 # dukes: *D*iff*U*se-boosted dar*K* matt*E*r by *S*upernova neutrinos
 
 
 `dukes` is a pyhon package for evaluating the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe based on [arXiv:2404.08528](https://arxiv.org/abs/2404.08528).
 It also supports an *experimental* feature that implements particle-model-dependent differential cross sections for DM-neutrino and DM-electron.
+
 
 ### Citation
 
