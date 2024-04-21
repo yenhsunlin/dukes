@@ -485,56 +485,55 @@ class dbdmSpectrum(constant):
         else:
             return 0
     
-    def _dbdmSpectrum(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta) -> float:
+    def _dbdmSpectrum(self,z,MG,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta) -> float:
         """
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx 
         tBH = cosmicAgeFit(z)*1e9 # convert to years
         if Txp < 150:  # discard the BDM signature if it requires Ev > 150 MeV at z 
-            MG = 10**m
-            return MG*dnG(m,z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,
-                                                               MG,R,l,theta,
-                                                               thetaCM,
-                                                               is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
+            m = _np.log10(MG)
+            return dnG(m,z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,
+                                                            MG,R,l,theta,
+                                                            thetaCM,
+                                                            is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
         else:
             return 0
         
-    def _dbdmSpectrumWeighted(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta,usefit) -> float:
+    def _dbdmSpectrumWeighted(self,z,MG,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta,usefit) -> float:
         """
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx 
         tBH = cosmicAgeFit(z)*1e9 # convert to years
         if Txp < 150:  # discard the BDM signature if it requires Ev > 130 MeV at z
-            MG = 10**m
             # adopt fitting data for galactic area density?
+            m = _np.log10(MG)
             if usefit is True:
                 galArealDensity = galacticAreaDensityFit((R,m))
             elif usefit is False:
                 galArealDensity = galacticAreaDensity(R,zRange=[-10,10],MG=MG)
             else:
                 raise FlagError('Flag \'usefit\' must be a boolean.')
-            
             return (2*_np.pi*R)*rhoDotSFR(z)*galArealDensity*dnG(m,z)*self._diffSpectrum(Txp,mx,
                                                                                          MG,R,l,theta,
                                                                                          thetaCM,
-                                                                                         is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)    
+                                                                                         is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)/MG    
         else:
             return 0
     
-    def __call__(self,z,m,Tx,mx,R,l,theta,thetaCM,is_spike,is_weighted,sigv,rhosMW,rsMW,eta,usefit):
+    def __call__(self,z,MG,Tx,mx,R,l,theta,thetaCM,is_spike,is_weighted,sigv,rhosMW,rsMW,eta,usefit):
         if is_weighted is True:
-            return self._dbdmSpectrumWeighted(z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta,usefit)
+            return self._dbdmSpectrumWeighted(z,MG,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta,usefit)
         elif is_weighted is False:
-            return self._dbdmSpectrum(z,m,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta)
+            return self._dbdmSpectrum(z,MG,Tx,mx,R,l,theta,thetaCM,is_spike,sigv,rhosMW,rsMW,eta)
         else:
             raise FlagError('Flag \'is_weighted\' must be a boolean.')
 
 
-def flux(Tx,mx,                                                           \
-         R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,      \
-         sigv=None,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True, \
+def flux(Tx,mx,
+         R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,
+         sigv=None,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,
          nitn=10,neval=50000):
     """
     DBDM flux for given (Tx,mx) assuming isotropic and energy-independent
@@ -569,15 +568,15 @@ def flux(Tx,mx,                                                           \
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,R,l,theta,thetaCM)
-        result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5], \
-                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,      \
+        integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,R,l,theta,thetaCM)
+        result = integrator(lambda x: spectrum(z=x[0],MG=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5],
+                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit),nitn=nitn,neval=neval).mean
         flux = 4*_np.pi**2*tau*result*constant.kpc2cm**3*vBDM(Tx,mx)*preFactor
     elif is_average is False:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,l,theta,thetaCM)
-        result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=R,l=x[2],theta=x[3],thetaCM=x[4],    \
-                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,      \
+        integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,l,theta,thetaCM)
+        result = integrator(lambda x: spectrum(z=x[0],MG=x[1],Tx=Tx,mx=mx,R=R,l=x[2],theta=x[3],thetaCM=x[4],
+                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit),nitn=nitn,neval=neval).mean
         flux = 4*_np.pi**2*tau*result*constant.kpc2cm**3*vBDM(Tx,mx)*preFactor
     else:
@@ -585,9 +584,9 @@ def flux(Tx,mx,                                                           \
     return flux
 
 
-def event(mx,                                                                          \
-          TxRange=[5,30],R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,  \
-          sigv=None,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,             \
+def event(mx,
+          TxRange=[5,30],R=0,Rmax=30,rmax=30,tau=10,is_spike=True,is_average=True,
+          sigv=None,rhosMW=184,rsMW=24.42,eta=24.3856,usefit=True,
           nitn=10,neval=50000):
     """
     DBDM event per electron per second for given mx assuming isotropic
@@ -624,17 +623,17 @@ def event(mx,                                                                   
     lmax = Rmax + rmax
     spectrum  = dbdmSpectrum()
     if is_average is True:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,R,l,theta,thetaCM)
-        result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=x[6],mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5],  \
-                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,         \
-                                               rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[6],mx=mx), \
+        integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,R,l,theta,thetaCM)
+        result = integrator(lambda x: spectrum(z=x[0],MG=x[1],Tx=x[6],mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM=x[5],
+                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,
+                                               rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[6],mx=mx),
                             nitn=nitn,neval=neval).mean
         event = 4*_np.pi**2*tau*result*constant.kpc2cm**3*preFactor
     elif is_average is False:
-        integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,l,theta,thetaCM,Tx)
-        result = integrator(lambda x: spectrum(z=x[0],m=x[1],Tx=x[5],mx=mx,R=R,l=x[2],theta=x[3],thetaCM=x[4],     \
-                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,         \
-                                               rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[5],mx=mx), \
+        integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,lmax],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,l,theta,thetaCM,Tx)
+        result = integrator(lambda x: spectrum(z=x[0],MG=x[1],Tx=x[5],mx=mx,R=R,l=x[2],theta=x[3],thetaCM=x[4],
+                                               is_spike=is_spike,is_weighted=is_average,sigv=sigv,
+                                               rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[5],mx=mx),
                             nitn=nitn,neval=neval).mean
         event = 4*_np.pi**2*tau*result*constant.kpc2cm**3*preFactor
     else:
