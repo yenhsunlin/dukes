@@ -147,30 +147,30 @@ class userPhenoModelInterface(constant):
         else:
             return 0
     
-    def _dbdmSpectrum(self,z,m,Tx,mx,R,l,theta,thetaCM_vx,is_spike,sigv,rhosMW,rsMW,eta) -> float:
+    def _dbdmSpectrum(self,z,MG,Tx,mx,R,l,theta,thetaCM_vx,is_spike,sigv,rhosMW,rsMW,eta) -> float:
         """
         DBDM spectrume yielded by SN at arbitrary position R
         """
         Txp = (1 + z)*Tx
         tBH = cosmicAgeFit(z)*1e9 # convert to years 
         if Txp < 150:  # discard the BDM signature if it requires Ev > 150 MeV at z 
-            MG = 10**m
-            return MG*dnG(m,z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,
-                                                               MG,R,l,theta,
-                                                               thetaCM_vx,
-                                                               is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
+            m = _np.log10(MG)
+            return dnG(m,z)*rhoDotSFR(z)*self._diffSpectrum(Txp,mx,
+                                                            MG,R,l,theta,
+                                                            thetaCM_vx,
+                                                            is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
         else:
             return 0
         
-    def _dbdmSpectrumWeighted(self,z,m,Tx,mx,R,l,theta,thetaCM_vx,is_spike,sigv,rhosMW,rsMW,eta,usefit) -> float:
+    def _dbdmSpectrumWeighted(self,z,MG,Tx,mx,R,l,theta,thetaCM_vx,is_spike,sigv,rhosMW,rsMW,eta,usefit) -> float:
         """
         DBDM spectrume yielded by SN at position R weighted by galactic baryonic distribution
         """
         Txp = (1 + z)*Tx
         tBH = cosmicAgeFit(z)*1e9 # convert to years 
         if Txp < 150:  # discard the BDM signature if it requires Ev > 150 MeV at z
-            MG = 10**m
             # adopt fitting data for galactic area density?
+            m = _np.log10(MG)
             if usefit is True:
                 galArealDensity = galacticAreaDensityFit((R,m))
             elif usefit is False:
@@ -181,7 +181,7 @@ class userPhenoModelInterface(constant):
             return (2*_np.pi*R)*rhoDotSFR(z)*galArealDensity*dnG(m,z)*self._diffSpectrum(Txp,mx,
                                                                                          MG,R,l,theta,
                                                                                          thetaCM_vx, 
-                                                                                         is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)
+                                                                                         is_spike,sigv,tBH,rhosMW,rsMW,eta)/_E(z)/MG
         else:
             return 0
 
@@ -221,14 +221,14 @@ class userPhenoModelInterface(constant):
                                         # 0.017: SN in MW per year; 1e6: converting Mpc^2 to kpc^2
         lmax = Rmax + rmax
         if is_average is True:
-            integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,R,l,theta,thetaCM_vx)
-            result = integrator(lambda x: self._dbdmSpectrumWeighted(z=x[0],m=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM_vx=x[5],    
+            integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,R,l,theta,thetaCM_vx)
+            result = integrator(lambda x: self._dbdmSpectrumWeighted(z=x[0],MG=x[1],Tx=Tx,mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM_vx=x[5],    
                                                                      is_spike=is_spike,sigv=sigv,rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit),
                                 nitn=nitn,neval=neval).mean
             flux = 4*_np.pi**2*tau*result*self.kpc2cm**3*vBDM(Tx,mx)*preFactor
         elif is_average is False:
-            integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,l,theta,thetaCM_vx)
-            result = integrator(lambda x: self._dbdmSpectrum(z=x[0],m=x[1],Tx=Tx,mx=mx,R=R,l=x[2],theta=x[3],thetaCM_vx=x[4], 
+            integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,lmax],[0,_np.pi],[0,_np.pi]]) #(z,m,l,theta,thetaCM_vx)
+            result = integrator(lambda x: self._dbdmSpectrum(z=x[0],MG=x[1],Tx=Tx,mx=mx,R=R,l=x[2],theta=x[3],thetaCM_vx=x[4], 
                                                              is_spike=is_spike,sigv=sigv,rhosMW=rhosMW,rsMW=rsMW,eta=eta),      
                                 nitn=nitn,neval=neval).mean
             flux = 4*_np.pi**2*tau*result*self.kpc2cm**3*vBDM(Tx,mx)*preFactor
@@ -271,15 +271,15 @@ class userPhenoModelInterface(constant):
         preFactor = self.MagicalNumber  # constant.D_H0*0.017/constant.Mmw/rhoDotSFR(0)/1e6/constant.kpc2cm**2/constant.year2Seconds
         lmax = Rmax + rmax
         if is_average is True:
-            integrator = _vegas.Integrator([[0,8],[6,12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,R,l,theta,thetaCM_vx,thetaCM_xe,Tx)
-            result = integrator(lambda x: self._dbdmSpectrumWeighted(z=x[0],m=x[1],Tx=x[7],mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM_vx=x[5],  
+            integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,Rmax],[0,lmax],[0,_np.pi],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,R,l,theta,thetaCM_vx,thetaCM_xe,Tx)
+            result = integrator(lambda x: self._dbdmSpectrumWeighted(z=x[0],MG=x[1],Tx=x[7],mx=mx,R=x[2],l=x[3],theta=x[4],thetaCM_vx=x[5],  
                                                is_spike=is_spike,sigv=sigv,         
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta,usefit=usefit)*vBDM(Tx=x[7],mx=mx)*self.dsigmaE(x[7],mx,x[6])*_np.sin(x[6]), 
                             nitn=nitn,neval=neval).mean
             event = 4*_np.pi**2*tau*result*self.kpc2cm**3*preFactor*(2*_np.pi)  # the last 2pi is due to diff cross section for DM-e is independent of azimuthal angle 
         elif is_average is False:
-            integrator = _vegas.Integrator([[0,8],[6,12],[0,lmax],[0,_np.pi],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,l,theta,thetaCM,thetaCM_xe,Tx)
-            result = integrator(lambda x: self._dbdmSpectrum(z=x[0],m=x[1],Tx=x[6],mx=mx,R=R,l=x[2],theta=x[3],thetaCM_vx=x[4],     
+            integrator = _vegas.Integrator([[0,8],[1e6,1e12],[0,lmax],[0,_np.pi],[0,_np.pi],[0,_np.pi],TxRange]) #(z,m,l,theta,thetaCM,thetaCM_xe,Tx)
+            result = integrator(lambda x: self._dbdmSpectrum(z=x[0],MG=x[1],Tx=x[6],mx=mx,R=R,l=x[2],theta=x[3],thetaCM_vx=x[4],     
                                                is_spike=is_spike,sigv=sigv,         
                                                rhosMW=rhosMW,rsMW=rsMW,eta=eta)*vBDM(Tx=x[6],mx=mx)*self.dsigmaE(x[6],mx,x[5])*_np.sin(x[5]), 
                                 nitn=nitn,neval=neval).mean
