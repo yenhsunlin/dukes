@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dukes"
-version = "1.3.1"
+version = "1.4.0"
 description = "This package evaluates the signatures of diffuse boosted dark matter by supernova neutrinos in the early Universe"
 readme = "README.md"
 authors = [{ name = "Yen-Hsun Lin", email = "yenhsun@phys.ncku.edu.tw" }]
