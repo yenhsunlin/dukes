@@ -419,7 +419,7 @@ def vBDM(Tx,mx) -> float:
 #    return 1e-35
 
 
-def supernovaNuFlux(Ev,l) -> float:
+def supernovaNuFlux(Ev,l,is_density=False) -> float:
     """
     SN neutrino flux after propagating a distance l
     
@@ -427,10 +427,12 @@ def supernovaNuFlux(Ev,l) -> float:
     ------
     Ev: SN neutrino energy, MeV
     l: propagation distance, kpc
+    is_density: output neutrino number denisty within shell
     
     Output
     ------
-    flux: #/Ev/cm^2/s
+    flux: #/Ev/cm^2/s, if is_density is False
+    number density: #/Ev/cm^3, if is_density is True
     """
     Lv = constant.Lv*constant.erg2MeV
     l = l*constant.kpc2cm
@@ -451,7 +453,13 @@ def supernovaNuFlux(Ev,l) -> float:
     nux_dist = _fv(Ev,6.26)/25
     
     L = Lv/(4*_np.pi*l**2)
-    return L*(nue_dist + nueb_dist + 4*nux_dist)
+    flux = L*(nue_dist + nueb_dist + 4*nux_dist)
+    if is_density is False:
+        return flux
+    elif is_density is True:
+        return flux/constant.c
+    else:
+        raise FlagError('Flag \'is_density\' must be a boolean.')
 
 
 
