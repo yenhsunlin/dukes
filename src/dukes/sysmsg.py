@@ -13,10 +13,15 @@
 
 
 class FlagError(Exception):
-    """
-    User-defined exception
-    """
+    
     def __init__(self, message):
+        """
+        User-defined exception
+
+        Input
+        ------
+        message: The message to raise when exception ecountered
+        """
         self.message = message
         
     def __str__(self):
