@@ -65,13 +65,14 @@ cosmicAgeFit = _CubicSpline(_z_data,_age_data)
 
 
 class generalDensityProfile:
-    """
-    This class contains the general mathematical expressions for bulge, stellar
-    disc and gas disc based on McMillan, MNRAS 465, 76 (2017). The unit is M_sun
-    per cubic kpc.
-    """
     
     def __init__(self):
+        """
+        This class contains the general mathematical expressions for bulge, stellar
+        disc and gas disc based on McMillan, MNRAS 465, 76 (2017). The unit is M_sun
+        per cubic kpc.
+        """
+    
         pass
     
     @staticmethod
