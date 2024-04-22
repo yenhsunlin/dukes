@@ -31,10 +31,11 @@ from .galMassFunction import dnG,_E,rhoDotSFR
 # ----- Dark matter halo profile -----
 
 class haloSpike(constant):  
-    """
-    Class for DM halo with spike scaled to arbitrary galactic mass MG
-    """
+    
     def __init__(self):
+        """
+        Class for DM halo with spike scaled to arbitrary galactic mass MG
+        """
         pass
     
     def _M_sigma(self,mBH):
