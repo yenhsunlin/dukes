@@ -13,42 +13,7 @@
 
 
 class constant:
-    """
-    Containing multiple physical constants and conversion factors
     
-    Conversion factors
-    ------
-    md2MeVperCubicCM: Msun/kpc^3 to MeV/cm^3
-    md2MeVperQuadCM: Msun/kpc^3 to MeV/cm^2
-    year2Seconds
-    erg2MeV
-    
-    Masses (MeV)
-    ------
-    me: electron
-    mn: neutron
-    mp: proton
-    Msun: Solar mass, MeV
-    Msun_kg: Solar mass, kg
-    Mmw: Milky Way stellar mass, Msun
-    Mhalo: DM halo mass of MW, Msun
-    
-    Lengths (cm)
-    ------
-    Rhalo: estimated MW halo radius, kpc
-
-    Cross section
-    ------
-    sigma0: default value for cross section, cm^2
-    
-    Physical constants
-    ------
-    c: light speed, cm/s
-    H0: Hubble constant, km/s/Mpc
-    rho_c: critical density, Msun/pc^3
-    Lv: SN neutrino luminosity, single specie, erg/s
-    G: Newton's constant, m^3/kg/s^2
-    """
     # conversion factors 
     md2MeVperCubicCM = 3.796e-05        # Msun/kpc^3 to MeV/cm^3
     md2MeVperQuadCM  = 1.171e+17        # Msun/kpc^3 to MeV/cm^2
@@ -84,3 +49,42 @@ class constant:
     G                = 4.301e-03        # Newton gravitational constant, pc Msun^-1 (km/s)^2
 
     MagicalNumber    = 2.572e-64        # Magician does Magic!
+
+    def __init__():
+        """
+        Containing multiple physical constants and conversion factors
+        
+        Conversion factors
+        ------
+        md2MeVperCubicCM: Msun/kpc^3 to MeV/cm^3
+        md2MeVperQuadCM: Msun/kpc^3 to MeV/cm^2
+        year2Seconds
+        erg2MeV
+        
+        Masses (MeV)
+        ------
+        me: electron
+        mn: neutron
+        mp: proton
+        Msun: Solar mass, MeV
+        Msun_kg: Solar mass, kg
+        Mmw: Milky Way stellar mass, Msun
+        Mhalo: DM halo mass of MW, Msun
+        
+        Lengths (cm)
+        ------
+        Rhalo: estimated MW halo radius, kpc
+
+        Cross section
+        ------
+        sigma0: default value for cross section, cm^2
+        
+        Physical constants
+        ------
+        c: light speed, cm/s
+        H0: Hubble constant, km/s/Mpc
+        rho_c: critical density, Msun/pc^3
+        Lv: SN neutrino luminosity, single specie, erg/s
+        G: Newton's constant, m^3/kg/s^2
+        """
+        pass
