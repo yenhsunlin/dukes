@@ -49,9 +49,8 @@ To import, do
 
 in python terminal and is similar in the jupyter notebook. All module functions named *funcname* can be called by typing `dukes.funcname`.
 
-### Examples
 
-#### Boosted dark matter velocity
+### Boosted dark matter velocity
 
 A boosted dark matter (BDM) with mass $m_\chi$ and kinetic energy $T_\chi$ has the velocity $v_\chi$,
 
@@ -66,7 +65,7 @@ Let $T_\chi=$ `Tx` and $=m_\chi=$ `mx`, the corresponding function that evaluate
     0.9860132971832694
 
 
-#### The diffuse BDM flux
+### The diffuse BDM flux
 
 The averaged diffuse BDM (DBDM) flux at redshift $z=0$ is given by
 
@@ -94,7 +93,7 @@ It requires quadrature integration `quad` from scipy and the computation time su
 The arguments `nitn` and `neval` are passed to `vegas` and determine how many chains of iteration and how many numbers to be evaluated in each chain. Increasing them will improve the accuracy of the results but also cost longer computation time. We relegate the detail to `vegas` [documentation](https://vegas.readthedocs.io/).
 
 
-#### Physical constants
+### Physical constants
 
 We have a class named `constant` that contains multiple physical constants and conversion factors frequently used in this package.
 For instance, electron mass
@@ -119,7 +118,7 @@ and year to seconds
     31556926
 
 
-### Scripting
+## Scripting
 
 In python script (see `tests/dukes_example.py`), one can write
 
