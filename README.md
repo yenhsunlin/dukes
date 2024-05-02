@@ -33,11 +33,15 @@ The changes and their new features are listed below:
 | `constant` | `Constants` |*class*|Various new data added|
 ||`constant`|*inst*|Instance of `Constants`|
 |`dmNumberDensity()`|`dmNumberDensity()`|*func*|Customizable halo shape|
-|`snNuEenergy()`|`snNuSpectrum()`|*func*|Allowing number density output and truncation point added|
+|`supernovaNuFlux()`|`snNuSpectrum()`|*func*|Truncation point can be specified|
+|`snNuEenergy()`||*func*||
+|`_dEv()`||*func*||
+|`_get_r()`||*func*||
 |`rhox()`|`rhox()`|*func*|Allowing customizable halo slope $n$|
-|`nxNFW()`||*func*|Fully integrated into `dmNumberDensity()`|
+|`nxNFW()`||*func*||
 ||`M_sigma()`|*func*|$M-\sigma$ relation|
 ||`radiusInfluence()`|*func*|SMBH influence radius|
+|`vBDM()`|`get_vx()`|*func*|Repeated feature|
 
 If there is no original one, it means that one is newly added.
 On the other hand, if there is no replaced one, it implies that one will be deprecated.
