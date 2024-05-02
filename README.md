@@ -17,7 +17,7 @@ If you use this package or part of the code in your research, please cite the fo
 1. Yen-Hsun Lin and Meng-Ru Wu, *Echoes of darkness: Supernova-neutrino-boosted dark matter from all galaxies*, arXiv:2404.08528
 2. `dukes`: https://github.com/yenhsunlin/dukes
 
-## 　<span style="color:cyan">SCHEDULED MAJOR UPDATE OF VERSION 2</span>
+## <span style="color:cyan">SCHEDULED MAJOR UPDATE OF VERSION 2</span>
 
 Through the release of `snorer`, a python package for evaluating time-of-flight SN*ν* BDM signature in Milky Way, Large Magellanic Cloud and arbitrary distant galaxy, the functions and classes for dealing with DM halo shape, BDM kinematics and various useful astrophysical relations become mature, clear and reusable. Furthermore, the halo spike for $\alpha=7/3$ is also included with custmizable halo shape for users.
 
