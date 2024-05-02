@@ -22,7 +22,7 @@ If you use this package or part of the code in your research, please cite the fo
 Through the release of `snorer`, a python package for evaluating time-of-flight SN*ν* BDM signature in Milky Way, Large Magellanic Cloud and arbitrary distant galaxy, the functions and classes for dealing with DM halo shape, BDM kinematics and various useful astrophysical relations become mature, clear and reusable. Furthermore, the halo spike for $\alpha=7/3$ is also included with custmizable halo shape for users.
 
 In the next major update of `dukes`, we will fully import these new features from `snorer` and the old ones will be replaced or deprecated.
-The two versions are generall *incompatible*.
+The two versions are generally *incompatible*.
 The changes and their new features are listed below:
 
 |  original   | replaced/added  |type|new features|
