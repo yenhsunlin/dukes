@@ -33,3 +33,6 @@ pip-wheel-metadata/
 #tests/
 test.*
 .virtual_documents/
+tests/nospike.pdf
+tests/spike_and_nospike.pdf
+tests/spike_with_ann_and_nospike.pdf
