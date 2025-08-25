@@ -172,6 +172,10 @@ and excute this on the prompt
 
 or whatever style you like!
 
+## Known issues
+
+Although we provide a class to implement the user-defined particle model, the interface incorrectly manipulates the energy-dependent scattering amplitude. This module should not be used until further updates.
+
 ## Bugs and troubleshooting
 
 Please report to the author, Yen-Hsun Lin, via [yenhsun@phys.ncku.edu.tw](mailto:yenhsun@phys.ncku.edu.tw).
